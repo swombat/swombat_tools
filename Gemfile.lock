@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/swombat/anthropic
+  revision: 143c12497501e2b6a98f500e37add45e923e3eca
+  specs:
+    anthropic (0.2.0)
+      event_stream_parser (>= 0.3.0, < 2.0.0)
+      faraday (>= 1)
+      faraday-multipart (>= 1)
+
 PATH
   remote: .
   specs:
@@ -90,6 +99,19 @@ GEM
     date (3.3.4)
     drb (2.2.1)
     erubi (1.12.0)
+    ethon (0.16.0)
+      ffi (>= 1.15.0)
+    event_stream_parser (1.0.0)
+    faraday (2.9.0)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (3.1.0)
+      net-http
+    faraday-typhoeus (1.1.0)
+      faraday (~> 2.0)
+      typhoeus (~> 1.4)
+    ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -109,7 +131,10 @@ GEM
     marcel (1.0.4)
     mini_mime (1.1.5)
     minitest (5.23.0)
+    multipart-post (2.4.1)
     mutex_m (0.2.0)
+    net-http (0.4.1)
+      uri
     net-imap (0.4.11)
       date
       net-protocol
@@ -122,6 +147,9 @@ GEM
     nio4r (2.7.3)
     nokogiri (1.16.5-arm64-darwin)
       racc (~> 1.4)
+    ollama-ai (1.2.1)
+      faraday (~> 2.9)
+      faraday-typhoeus (~> 1.1)
     psych (5.1.2)
       stringio
     puma (6.4.2)
@@ -169,6 +197,10 @@ GEM
       psych (>= 4.0.0)
     reline (0.5.7)
       io-console (~> 0.5)
+    ruby-openai (7.0.1)
+      event_stream_parser (>= 0.3.0, < 2.0.0)
+      faraday (>= 1)
+      faraday-multipart (>= 1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -180,8 +212,11 @@ GEM
     stringio (3.1.0)
     thor (1.3.1)
     timeout (0.4.1)
+    typhoeus (1.4.1)
+      ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uri (0.13.0)
     webrick (1.8.1)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -192,7 +227,10 @@ PLATFORMS
   arm64-darwin
 
 DEPENDENCIES
+  anthropic!
+  ollama-ai
   puma
+  ruby-openai
   sprockets-rails
   sqlite3
   swombat_tools!
