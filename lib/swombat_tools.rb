@@ -6,10 +6,8 @@ module SwombatTools
     isolate_namespace SwombatTools
 
     config.to_prepare do
-      ActiveSupport.on_load(:active_record) do
-        puts "Including SwombatTools"
-        Team.include(SwombatTools::Team)
-      end
+      puts "Including SwombatTools"
+      Team.include(SwombatTools::Team)
     end
   end
 end
