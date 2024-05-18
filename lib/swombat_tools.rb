@@ -2,5 +2,13 @@ require "swombat_tools/version"
 require "swombat_tools/engine"
 
 module SwombatTools
-  # Your code goes here...
+  class Engine < ::Rails::Engine
+    isolate_namespace SwombatTools
+
+    config.to_prepare do
+      ActiveSupport.on_load(:active_record) do
+        Team.include(SwombatTools::Team)
+      end
+    end
+  end
 end
