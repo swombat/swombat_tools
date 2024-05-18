@@ -6,11 +6,13 @@ module SwombatTools
     isolate_namespace SwombatTools
 
     config.to_prepare do
-      ::Team.class_eval do
-        def test_swombat?
-          true
-        end
-      end
+      ::Team.include(SwombatTools::Team)
+
+      # ::Team.class_eval do
+      #   def is_?
+      #     true
+      #   end
+      # end
     end
   end
 end
