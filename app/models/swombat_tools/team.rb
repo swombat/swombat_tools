@@ -3,6 +3,7 @@ module SwombatTools
     extend ActiveSupport::Concern
 
     included do
+      puts "Team Concern included"
       def test_swombat?
         true
       end
