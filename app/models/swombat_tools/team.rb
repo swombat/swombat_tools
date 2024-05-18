@@ -4,8 +4,8 @@ module SwombatTools
 
     included do
       puts "Team Concern included"
-      def test_swombat?
-        true
+      def site_admin?
+        team.id == ENV.fetch("SITE_ADMIN_TEAM_ID", 1)
       end
     end
 

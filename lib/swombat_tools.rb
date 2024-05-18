@@ -7,12 +7,6 @@ module SwombatTools
 
     config.to_prepare do
       ::Team.include(SwombatTools::Team)
-
-      # ::Team.class_eval do
-      #   def is_?
-      #     true
-      #   end
-      # end
     end
   end
 end
