@@ -7,3 +7,5 @@ module SwombatTools
     end
   end
 end
+
+puts "Loaded Team Concern"
