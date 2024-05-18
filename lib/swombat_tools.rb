@@ -6,8 +6,11 @@ module SwombatTools
     isolate_namespace SwombatTools
 
     config.to_prepare do
-      puts "Including SwombatTools"
-      Team.include(SwombatTools::Team)
+      Team.class_eval do
+        def test_swombat?
+          true
+        end
+      end
     end
   end
 end
