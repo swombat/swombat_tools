@@ -6,7 +6,7 @@ module SwombatTools
     isolate_namespace SwombatTools
 
     config.to_prepare do
-      Team.class_eval do
+      ::Team.class_eval do
         def test_swombat?
           true
         end
