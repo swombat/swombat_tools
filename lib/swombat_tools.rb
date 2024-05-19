@@ -10,5 +10,3 @@ module SwombatTools
     end
   end
 end
-
-puts "Engine loaded"

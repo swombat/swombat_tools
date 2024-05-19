@@ -15,7 +15,7 @@ module GeneratorHelper
     end
   end
 
-  def conditional_inject(file:, after:, injection:, name:)
+  def conditional_inject(file:, after:nil, injection:, name:)
     unless File.exist?(file)
       say "File #{file} does not exist - cannot install #{name}", :red
       return
@@ -28,7 +28,7 @@ module GeneratorHelper
       if after.nil?
         say "Appending #{name} to #{file}", :blue
         append_to_file file, injection
-      elsf contents.include?(after)
+      elsif contents.include?(after)
         say "Found #{after} in #{file}", :green
         say "Adding #{name} to #{file}", :blue
         inject_into_file file, after: after do

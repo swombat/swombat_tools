@@ -9,25 +9,35 @@ module Swombat
 
       source_root File.expand_path('templates', __dir__)
 
-      class_option :package_manager, type: :string, default: 'yarn', desc: 'Choose the package manager to use: npm or yarn'
-
-      def report_parameters
-        say "Preparing to install Fontawesome with options:", :green
-        say " - Package manager: #{options[:package_manager]}", :green
+      def check_not_installed
+        say "Checking that InvitationKeys is not already installed", :green
+        if File.exist?("app/models/invitation_key.rb")
+          say "It looks like InvitationKeys is already installed. Aborting.", :red
+          exit
+        end
       end
 
-      def install_fontawesome
-        unless no?("Install FontAwesome package using #{options[:package_manager]}? (Y/n)", :green)
-          install_package(manager: options[:package_manager], package: "@fortawesome/fontawesome-free", name: "FontAwesome")
+      def run_generator
+        say "Running generator...", :green
+        rails_command "generate super_scaffold InvitationKey Team key:text_field"
+      end
+
+      def run_migrations
+        say "Running migrations...", :green
+        unless no?("Run migrations now? (Y/n)", :green)
+          rails_command "db:migrate"
+        else
+          say "Skipping migrations - don't forget to rails db:migrate!", :yellow
         end
-        unless no?("Add FontAwesome to the application.js? (Y/n)", :green)
-          conditional_inject(
-            file: "app/javascript/application.js",
-            after: %(require("@icon/themify-icons/themify-icons.css")),
-            injection: %(\nimport "@fortawesome/fontawesome-free/js/all";\n),
-            name: "FontAwesome"
-          )
-        end
+      end
+
+      def add_patches
+        say "Patching BulletTrain Invitation system", :green
+        conditional_inject(
+          file: "config/initializers/bullet_train.rb",
+          injection: File.read("#{self.source_paths.first}/bullet_train.rb"),
+          name: "Upgraded Invitation System"
+        )
       end
     end
   end

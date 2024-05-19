@@ -3,7 +3,6 @@ module SwombatTools
     extend ActiveSupport::Concern
 
     included do
-      puts "Team Concern included"
       def site_admin?
         team.id == ENV.fetch("SITE_ADMIN_TEAM_ID", 1)
       end
@@ -11,5 +10,3 @@ module SwombatTools
 
   end
 end
-
-puts "Loaded Team Concern"
