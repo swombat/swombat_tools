@@ -25,6 +25,12 @@ module Swombat
         copy_file "rubocop.yml", ".rubocop.yml"
         say "Rubocop config copied", :green
       end
+
+      def hide_things
+        say "Setting HIDE_THINGS to true", :green
+        say "Adding HIDE_THINGS=true to config/application.yml", :green
+        append_to_file "config/application.yml", "HIDE_THINGS=true"
+      end
     end
   end
 end
