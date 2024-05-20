@@ -29,8 +29,8 @@ module Swombat
       def hide_things
         say "Setting HIDE_THINGS to true", :green
         say "Adding HIDE_THINGS=true to config/application.yml", :green
-        unless File.read("config/application.yml").include?("HIDE_THINGS=true")
-          append_to_file "config/application.yml", "\nHIDE_THINGS=true"
+        unless File.read("config/application.yml").include?('HIDE_THINGS')
+          append_to_file "config/application.yml", '\nHIDE_THINGS: true'
           say "HIDE_THINGS set to true", :green
         else
           say "HIDE_THINGS already set to true, skipping", :yellow

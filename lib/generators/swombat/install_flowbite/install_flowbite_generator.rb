@@ -27,18 +27,30 @@ module Swombat
           install_package(manager: options[:package_manager], package: "flowbite", name: "Flowbite")
         end
         unless no?("Attempt to add Flowbite to the tailwind.config.js automatically? (Y/n)", :green)
-          conditional_inject(
-            file: @tailwind_config,
-            after: %(plugins: [),
-            injection: %{\n    require('flowbite/plugin'),},
-            name: "Flowbite"
-          )
-          conditional_inject(
-            file: @tailwind_config,
-            after: %(content: [),
-            injection: %{\n    './node_modules/flowbite/**/*.js',},
-            name: "Flowbite"
-          )
+          if File.read(@tailwind_config).include?("themeConfig")
+            say "using themeConfig to add Flowbite", :yellow
+            conditional_inject(
+              file: @tailwind_config,
+              after: %(// *** Add your own overrides here ***),
+              injection: [%{\nthemeConfig.plugins.push(require('flowbite/plugin'));},
+                %{themeConfig.content.push('./node_modules/flowbite/**/*.js')}].join("\n"),
+              name: "Flowbite"
+            )
+          else
+            say "No themeConfig - looking for plugins[]", :yellow
+            conditional_inject(
+              file: @tailwind_config,
+              after: %(plugins: [),
+              injection: %{\n    require('flowbite/plugin'),},
+              name: "Flowbite"
+            )
+            conditional_inject(
+              file: @tailwind_config,
+              after: %(content: [),
+              injection: %{\n    './node_modules/flowbite/**/*.js',},
+              name: "Flowbite"
+            )
+          end
         end
         if options[:turbo]
           unless no?("Attempt to add flowbite turbo support with #{options[:bundler]}? (Y/n)", :green)
