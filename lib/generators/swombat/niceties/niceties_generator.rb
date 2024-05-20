@@ -21,7 +21,7 @@ module Swombat
 
       def copy_rubocop_config
         say "Overwriting rubocop config", :green
-        rm ".rubocop.yml" if File.exist?(".rubocop.yml")
+        File.delete(".rubocop.yml") if File.exist?(".rubocop.yml")
         copy_file "rubocop.yml", ".rubocop.yml"
         say "Rubocop config copied", :green
       end
@@ -43,6 +43,16 @@ module Swombat
           %(gem "ruby-openai"),
           %(gem "ollama-ai")].join("\n")
         say "*** Please run bundle", :green
+      end
+
+      def sidekiq
+        unless no?("Setup alternative queue for Sidekiq? (Y/n)", :green)
+          db_number = ask("What is the number of the database you want to use for Sidekiq? (1-16, default: 1)", :green)
+          db_number = 1 if db_number.blank?
+          say "Appending sidekiq settings", :green
+          append_to_file "config/initializers/sidekiq.rb", "\n" + File.read("#{self.source_paths.first}/sidekiq.rb")
+          gsub_file "config/initializers/sidekiq.rb", "{{DB}}", db_number.to_s
+        end
       end
     end
   end
