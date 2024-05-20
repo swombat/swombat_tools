@@ -28,7 +28,6 @@ class ClaudeApi < LlmApi
       stream: stream_proc,
       preprocess_stream: stream_response_type
     }
-    debug(parameters.inspect, "parameters")
 
     parameters[:messages] << { 'role': 'user', 'content': params[:user] } if params[:user]
     parameters[:messages] << { 'role': 'assistant', 'content': params[:format] } if params[:format].present?

@@ -15,6 +15,14 @@ module GeneratorHelper
     end
   end
 
+
+  def append_to_line(file:, line:, append:)
+    say "Appending #{append} to #{line} in #{file}", :blue
+    inject_into_file file, after: line do
+      append
+    end
+  end
+
   def conditional_inject(file:, after:nil, injection:, name:)
     unless File.exist?(file)
       say "File #{file} does not exist - cannot install #{name}", :red

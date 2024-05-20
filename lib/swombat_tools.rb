@@ -7,6 +7,11 @@ module SwombatTools
 
     config.to_prepare do
       ::Team.include(SwombatTools::Team)
+      ::ApplicationHelper.include(SwombatTools::ApplicationHelper)
+      if (File.read("Gemfile").include?("anthropic"))
+        API_CLASSES = [::ClaudeApi, ::OpenAiApi]
+      end
     end
+
   end
 end

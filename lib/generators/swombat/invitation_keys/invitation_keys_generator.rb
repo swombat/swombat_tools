@@ -39,6 +39,15 @@ module Swombat
           name: "Upgraded Invitation System"
         )
       end
+
+      def enabling_cable
+        say "Enabling Cable Updates", :green
+        append_to_line(
+          file: "app/models/team.rb",
+          line: "has_many :invitation_keys, dependent: :destroy",
+          append: ", enable_cable_ready_updates: true"
+        )
+      end
     end
   end
 end
