@@ -25,6 +25,7 @@ module Swombat
       def install_flowbite
         unless no?("Install Flowbite package using #{options[:package_manager]}? (Y/n)", :green)
           install_package(manager: options[:package_manager], package: "flowbite", name: "Flowbite")
+          install_package(manager: options[:package_manager], package: "flowbite-datepicker", name: "Flowbite Datepicker")
         end
         unless no?("Attempt to add Flowbite to the tailwind.config.js automatically? (Y/n)", :green)
           if File.read(@tailwind_config).include?("themeConfig")
