@@ -26,6 +26,17 @@ module Swombat
         say "Rubocop config copied", :green
       end
 
+      def disable_developer_menu
+        say "Setting DISABLE_DEVELOPER_MENU to true", :green
+        say "Adding DISABLE_DEVELOPER_MENU=true to config/application.yml", :green
+        unless File.read("config/application.yml").include?("DISABLE_DEVELOPER_MENU")
+          append_to_file "config/application.yml", "\DISABLE_DEVELOPER_MENU: true"
+          say "DISABLE_DEVELOPER_MENU set to true", :green
+        else
+          say "DISABLE_DEVELOPER_MENU already set to true, skipping", :yellow
+        end
+      end
+
       def hide_things
         say "Setting HIDE_THINGS to true", :green
         say "Adding HIDE_THINGS=true to config/application.yml", :green
@@ -36,6 +47,7 @@ module Swombat
           say "HIDE_THINGS already set to true, skipping", :yellow
         end
       end
+
 
       def add_gems
         say "Adding gems to Gemfile", :green
