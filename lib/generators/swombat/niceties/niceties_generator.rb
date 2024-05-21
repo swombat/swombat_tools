@@ -29,8 +29,8 @@ module Swombat
       def hide_things
         say "Setting HIDE_THINGS to true", :green
         say "Adding HIDE_THINGS=true to config/application.yml", :green
-        unless File.read("config/application.yml").include?('HIDE_THINGS')
-          append_to_file "config/application.yml", '\nHIDE_THINGS: true'
+        unless File.read("config/application.yml").include?("HIDE_THINGS")
+          append_to_file "config/application.yml", "\nHIDE_THINGS: true"
           say "HIDE_THINGS set to true", :green
         else
           say "HIDE_THINGS already set to true, skipping", :yellow
@@ -59,6 +59,8 @@ module Swombat
             say "Appending sidekiq settings", :green
             append_to_file "config/initializers/sidekiq.rb", "\n" + File.read("#{self.source_paths.first}/sidekiq.rb")
             gsub_file "config/initializers/sidekiq.rb", "{{DB}}", db_number.to_s
+          else
+            say "Sidekiq alternative queue not setup, skipping", :yellow
           end
         else
           say "Sidekiq alternative queue already setup, skipping", :yellow
@@ -76,7 +78,7 @@ module Swombat
       def update_production_procfile
         say "Updating Production Procfile", :green
         gsub_file "Procfile", "-t 5:5", "-t 8:32"
-        gsub_file "release: bundle exec rails db:migrate; bundle exec rails db:seed", "release: bundle exec rails db:migrate"
+        gsub_file "Procfile", "release: bundle exec rails db:migrate; bundle exec rails db:seed", "release: bundle exec rails db:migrate"
       end
 
       def copy_dockerfile
