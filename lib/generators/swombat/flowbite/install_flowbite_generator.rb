@@ -2,7 +2,7 @@ require 'generator_helper'
 
 module Swombat
   module Generators
-    class InstallFlowbiteGenerator < Rails::Generators::Base
+    class FlowbiteGenerator < Rails::Generators::Base
       include GeneratorHelper
 
       desc "Installs Flowbite and configures Tailwind CSS to use Flowbite"

@@ -2,7 +2,7 @@ require 'generator_helper'
 
 module Swombat
   module Generators
-    class InstallFontawesomeGenerator < Rails::Generators::Base
+    class FontawesomeGenerator < Rails::Generators::Base
       include GeneratorHelper
 
       desc "Installs Fontawesome and configures BulletTrain to use Fontawesome"
