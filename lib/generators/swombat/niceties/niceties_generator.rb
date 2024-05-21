@@ -39,19 +39,53 @@ module Swombat
 
       def add_gems
         say "Adding gems to Gemfile", :green
-        append_to_file "Gemfile", "\n" + [%(gem "anthropic", git: "https://github.com/swombat/anthropic"),
-          %(gem "ruby-openai"),
-          %(gem "ollama-ai")].join("\n")
-        say "*** Please run bundle", :green
+        unless File.read("Gemfile").include?("anthropic")
+          append_to_file "Gemfile", "\n" + [%(gem "anthropic", git: "https://github.com/swombat/anthropic"),
+            %(gem "ruby-openai"),
+            %(gem "ollama-ai")].join("\n")
+          say "Appended anthropic, ruby and ollama gems", :green
+          say "*** Please run bundle", :green
+        else
+          say "Anthropic gem already in Gemfile, skipping", :yellow
+        end
       end
 
       def sidekiq
-        unless no?("Setup alternative queue for Sidekiq? (Y/n)", :green)
-          db_number = ask("What is the number of the database you want to use for Sidekiq? (1-16, default: 1)", :green)
-          db_number = 1 if db_number.blank?
-          say "Appending sidekiq settings", :green
-          append_to_file "config/initializers/sidekiq.rb", "\n" + File.read("#{self.source_paths.first}/sidekiq.rb")
-          gsub_file "config/initializers/sidekiq.rb", "{{DB}}", db_number.to_s
+        say "Setting up Sidekiq", :green
+        unless File.read("config/initializers/sidekiq.rb").include?("sidekiq_development.log")
+          unless no?("Setup alternative queue for Sidekiq? (Y/n)", :green)
+            db_number = ask("What is the number of the database you want to use for Sidekiq? (1-16, default: 1)", :green)
+            db_number = 1 if db_number.blank?
+            say "Appending sidekiq settings", :green
+            append_to_file "config/initializers/sidekiq.rb", "\n" + File.read("#{self.source_paths.first}/sidekiq.rb")
+            gsub_file "config/initializers/sidekiq.rb", "{{DB}}", db_number.to_s
+          end
+        else
+          say "Sidekiq alternative queue already setup, skipping", :yellow
+        end
+      end
+
+      def update_dev_procfile
+        new_port = ask("Update Procfile to set custom port? (default: 3000)", :green)
+        if new_port.present? && new_port != 3000
+          say "Updating Procfile", :green
+          gsub_file "Procfile.dev", "3000", new_port
+        end
+      end
+
+      def update_production_procfile
+        say "Updating Production Procfile", :green
+        gsub_file "Procfile", "-t 5:5", "-t 8:32"
+        gsub_file "release: bundle exec rails db:migrate; bundle exec rails db:seed", "release: bundle exec rails db:migrate"
+      end
+
+      def copy_dockerfile
+        say "Copying Dockerfile", :green
+        unless File.exist?("Dockerfile")
+          copy_file "Dockerfile", "Dockerfile"
+          say "Dockerfile copied", :green
+        else
+          say "Dockerfile already exists, skipping", :yellow
         end
       end
     end
