@@ -1,17 +1,21 @@
 require 'openai'
 
 class OpenAiApi < LlmApi
-  def initialize(access_token:)
+  def initialize(access_token: "x")
     super()
     @access_token = access_token
     @client = OpenAI::Client.new(access_token: @access_token)
   end
 
   def models
-    @models ||= @client.models.list["data"]
-      .select { |model| model["id"].starts_with?("gpt") }
-      .sort_by { |model| model["created"] }.reverse
-      .collect { |model| model["id"] }
+    if @access_token == "x"
+      @models = ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"]
+    else
+      @models ||= @client.models.list["data"]
+        .select { |model| model["id"].starts_with?("gpt") }
+        .sort_by { |model| model["created"] }.reverse
+        .collect { |model| model["id"] }
+    end
   end
 
   def get_response(params:, stream_proc:, stream_response_type:)
@@ -60,6 +64,7 @@ class OpenAiApi < LlmApi
 
     parameters[:messages] << { role: "system", content: params[:system] } if params[:system]
     parameters[:messages] << { role: "user", content: params[:user] } if params[:user]
+    puts parameters.inspect
     @client.chat(parameters: parameters)
 
     # Fake it for now

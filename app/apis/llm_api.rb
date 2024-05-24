@@ -1,4 +1,4 @@
-class LlmApi
+class LlmApi < GenericApi
   # Expected API:
 
   # Interface with whatever gem is required to get a response
@@ -15,21 +15,5 @@ class LlmApi
   # Return all the models available to this API.
   def models
     raise NameError, "Forgot to implement the 'models' method in #{self.class.name}"
-  end
-
-  @subclasses = []
-
-  class << self
-    attr_accessor :subclasses
-
-    def register(*subclasses)
-      @subclasses ||= []
-      subclasses.each { |subclass| @subclasses << subclass.to_s }
-    end
-
-    # Register in `config/initializers/llm_api.rb`
-    def registered_subclasses
-      @subclasses || []
-    end
   end
 end
