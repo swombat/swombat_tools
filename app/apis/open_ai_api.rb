@@ -4,7 +4,10 @@ class OpenAiApi < LlmApi
   def initialize(access_token: "x")
     super()
     @access_token = access_token
-    @client = OpenAI::Client.new(access_token: @access_token)
+    @client = OpenAI::Client.new(
+      access_token: @access_token,
+      request_timeout: 20
+      )
   end
 
   def models
