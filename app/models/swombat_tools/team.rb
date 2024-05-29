@@ -4,7 +4,7 @@ module SwombatTools
 
     included do
       def site_admin?
-        team.id == ENV.fetch("SITE_ADMIN_TEAM_ID", 1)
+        team.id == ENV.fetch("SITE_ADMIN_TEAM_ID", 1).to_i
       end
     end
 
