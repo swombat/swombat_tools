@@ -67,7 +67,10 @@ class OpenAiApi < LlmApi
 
     parameters[:messages] << { role: "system", content: params[:system] } if params[:system]
     parameters[:messages] << { role: "user", content: params[:user] } if params[:user]
+
+    parameters[:messages] = params[:messages] if params[:messages]
     puts parameters.inspect
+
     @client.chat(parameters: parameters)
 
     # Fake it for now
@@ -87,6 +90,7 @@ class OpenAiApi < LlmApi
     end
     logger.error(error)
   end
+
 end
 
 LlmApi.register(OpenAiApi)
