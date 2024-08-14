@@ -44,7 +44,6 @@ class OpenAiApi < LlmApi
         if stream_response_type == :text
           delta = chunk.dig("choices", 0, "delta", "content")
           next if delta.nil?
-          puts response.inspect
           response[:usage][:output_tokens] += 1
           incremental_response += delta
           stream_proc.call(incremental_response, delta)
@@ -69,7 +68,6 @@ class OpenAiApi < LlmApi
     parameters[:messages] << { role: "user", content: params[:user] } if params[:user]
 
     parameters[:messages] = params[:messages] if params[:messages]
-    puts parameters.inspect
 
     @client.chat(parameters: parameters)
 
