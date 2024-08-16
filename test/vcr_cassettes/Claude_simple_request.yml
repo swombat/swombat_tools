@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.anthropic.com/v1/messages
+    body:
+      encoding: UTF-8
+      string: '{"model":"claude-3-5-sonnet-20240620","temperature":0.9,"max_tokens":4096,"messages":[{"role":"user","content":"Hi
+        there! Please tell me something nice as a greeting."}]}'
+    headers:
+      X-Api-Key:
+      - "<ANTHROPIC_API_KEY>"
+      Anthropic-Version:
+      - '2023-06-01'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 15 Aug 2024 17:22:13 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Anthropic-Ratelimit-Requests-Limit:
+      - '4000'
+      Anthropic-Ratelimit-Requests-Remaining:
+      - '3999'
+      Anthropic-Ratelimit-Requests-Reset:
+      - '2024-08-15T17:22:33Z'
+      Anthropic-Ratelimit-Tokens-Limit:
+      - '400000'
+      Anthropic-Ratelimit-Tokens-Remaining:
+      - '400000'
+      Anthropic-Ratelimit-Tokens-Reset:
+      - '2024-08-15T17:22:13Z'
+      Request-Id:
+      - req_01Ub9Et9Kdrn6dTsxgiSrzxk
+      X-Cloud-Trace-Context:
+      - 23d3ae69171a5fb3261bc079ea5cce06
+      Via:
+      - 1.1 google
+      Cf-Cache-Status:
+      - DYNAMIC
+      X-Robots-Tag:
+      - none
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8b3add88aa8b77a6-LHR
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"msg_01SKcPqnCPjHmPDgXUbjCAKC","type":"message","role":"assistant","model":"claude-3-5-sonnet-20240620","content":[{"type":"text","text":"Hello!
+        It''s wonderful to hear from you today. I hope you''re having a fantastic
+        day filled with joy, positivity, and exciting opportunities. Remember, you
+        are unique, valuable, and capable of amazing things. Your presence brightens
+        the world around you!"}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":19,"output_tokens":56}}'
+  recorded_at: Thu, 15 Aug 2024 17:22:13 GMT
+recorded_with: VCR 6.2.0

@@ -13,6 +13,12 @@ gem "sprockets-rails"
 # Start debugger with binding.b [https://github.com/ruby/debug]
 # gem "debug", ">= 1.0.0"
 
-gem "anthropic", git: "https://github.com/swombat/anthropic"
+# , path: "../swombat_tools"
+gem "anthropic", path: "../anthropic"
 gem "ruby-openai"
 gem "ollama-ai"
+gem "webmock"
+
+group :test do
+  gem "vcr"
+end

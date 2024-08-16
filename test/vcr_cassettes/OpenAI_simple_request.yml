@@ -1,0 +1,100 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-4o","messages":[{"role":"user","content":"Hi there! Please
+        tell me something nice as a greeting."}],"temperature":0.7}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <OPENAI_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 16 Aug 2024 13:45:52 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Openai-Organization:
+      - user-pe37st55wxcpvmlkqbqqbion
+      Openai-Processing-Ms:
+      - '1434'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      X-Ratelimit-Limit-Requests:
+      - '10000'
+      X-Ratelimit-Limit-Tokens:
+      - '2000000'
+      X-Ratelimit-Remaining-Requests:
+      - '9999'
+      X-Ratelimit-Remaining-Tokens:
+      - '1999969'
+      X-Ratelimit-Reset-Requests:
+      - 6ms
+      X-Ratelimit-Reset-Tokens:
+      - 0s
+      X-Request-Id:
+      - req_6a3f03d87881ecd002791aae590169c1
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=A.d6lWlFSiHOVXtD5j_Y4GOFifFR.mdBeu9v7x7D4Y0-1723815952-1.0.1.1-E3jvMA7rdvzRKfndzvn_nUnw2ouM.ZPKFn0NxzYZAm_zfd78KIlltm6Ax0xmnV_2mloTkJer5PmM.i_FNAp1Tg;
+        path=/; expires=Fri, 16-Aug-24 14:15:52 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      - _cfuvid=a5yFBR94p7cvkFA12If_dC6JVpRx3shHe6TztEMPoVU-1723815952180-0.0.1.1-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8b41ddf8ead70706-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "id": "chatcmpl-9wrZ0AZEGmx1aiDIacmHr4y4p16pT",
+          "object": "chat.completion",
+          "created": 1723815950,
+          "model": "gpt-4o-2024-05-13",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "Hello there! It's wonderful to connect with you. I hope your day is filled with joy and positivity. How can I assist you today?",
+                "refusal": null
+              },
+              "logprobs": null,
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 19,
+            "completion_tokens": 28,
+            "total_tokens": 47
+          },
+          "system_fingerprint": "fp_3aa7262c27"
+        }
+  recorded_at: Fri, 16 Aug 2024 13:45:52 GMT
+recorded_with: VCR 6.2.0

@@ -1,0 +1,270 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.anthropic.com/v1/messages
+    body:
+      encoding: UTF-8
+      string: '{"model":"claude-3-5-sonnet-20240620","temperature":0.9,"max_tokens":4096,"messages":[{"role":"user","content":"Hi
+        there! Please give me three fun and interesting facts about cats. Respond
+        with a JSON array, along with a preamble and conclusion. Each object in the
+        array should have ''fact'' and ''category'' keys."}],"stream":true}'
+    headers:
+      X-Api-Key:
+      - "<ANTHROPIC_API_KEY>"
+      Anthropic-Version:
+      - '2023-06-01'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 16 Aug 2024 13:32:40 GMT
+      Content-Type:
+      - text/event-stream; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-cache
+      Anthropic-Ratelimit-Requests-Limit:
+      - '4000'
+      Anthropic-Ratelimit-Requests-Remaining:
+      - '3999'
+      Anthropic-Ratelimit-Requests-Reset:
+      - '2024-08-16T13:33:33Z'
+      Anthropic-Ratelimit-Tokens-Limit:
+      - '400000'
+      Anthropic-Ratelimit-Tokens-Remaining:
+      - '396000'
+      Anthropic-Ratelimit-Tokens-Reset:
+      - '2024-08-16T13:32:40Z'
+      Request-Id:
+      - req_013RAR8xmsD4eqDKcWhnU3Za
+      Via:
+      - 1.1 google
+      Cf-Cache-Status:
+      - DYNAMIC
+      X-Robots-Tag:
+      - none
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8b41caac4caacd31-LHR
+    body:
+      encoding: UTF-8
+      string: |+
+        event: message_start
+        data: {"type":"message_start","message":{"id":"msg_01GD8kBqx89g2UMzYromXi4M","type":"message","role":"assistant","model":"claude-3-5-sonnet-20240620","content":[],"stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":55,"output_tokens":2}}           }
+
+        event: content_block_start
+        data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""} }
+
+        event: ping
+        data: {"type": "ping"}
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"Here's"}       }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" a JSON array with three"}         }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" fun and interesting facts about"}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" cats, along with a"}      }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" preamble and conclusion"}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":":"}             }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\n\nPreamble:"}  }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" Cats are fascinating creatures that"}        }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" have captivated humans"}        }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" for thousands of years."}  }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" Here"}           }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" are some int"}      }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"riguing facts about our"}             }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" f"}   }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"eline friends:"}             }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\n\n["}       }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\n  {\n    "}       }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\"fact\": \""}        }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"Cats can make"}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" over 100 different"}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" vocal"}}
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" sounds, while"}              }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" dogs can"}           }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" only make about 10"}         }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":".\",\n    \"category"}     }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\": \"Communication"}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\"\n  },"}}
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\n  {\n    \""}     }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"fact\": \"A"}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" group"}      }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" of cats is called a"}}
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" "}               }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"'clowder'"}      }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":".\",\n    \"category"}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\": \"Terminology"}   }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\"\n  },"}              }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\n  {\n    \""}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"fact\": \"Cats"}         }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" spen"}      }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"d approximately"}         }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" 70"}      }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"% of their lives"}          }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" sleeping.\",\n    \""}  }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"category\": \"Behavior"}      }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\"\n  }"}       }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"\n]\n\nConclusion:"}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" These"}        }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" facts"}        }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" demonstrate"}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" just"}               }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" how unique"}            }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" and interesting"}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" cats can"}   }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" be. From their diverse"}         }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" vocal range to their sleeping"}             }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" habits, cats continue"}   }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" to surprise"}  }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" and delight us with"}   }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" their quir"}    }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"ks"}   }
+
+        event: content_block_delta
+        data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" and behaviors."}               }
+
+        event: content_block_stop
+        data: {"type":"content_block_stop","index":0          }
+
+        event: message_delta
+        data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":215}           }
+
+        event: message_stop
+        data: {"type":"message_stop"               }
+
+  recorded_at: Fri, 16 Aug 2024 13:32:42 GMT
+recorded_with: VCR 6.2.0
+...

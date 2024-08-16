@@ -21,7 +21,7 @@ class OpenAiApi < LlmApi
     end
   end
 
-  def get_response(params:, stream_proc:, stream_response_type:)
+  def get_response(params:, stream_proc: nil, stream_response_type: :text)
     params = params.transform_keys(&:to_sym)
     incremental_response = ""
     raise "Unsupported stream response type #{stream_response_type}" unless [:text, :json].include?(stream_response_type)
@@ -38,17 +38,20 @@ class OpenAiApi < LlmApi
     parameters = {
       model: params[:model] || @model,
       messages: [],
-      temperature: params[:temperature] || 0.7,
-      stream: proc do |chunk, _bytesize|
+      temperature: params[:temperature] || 0.7
+    }
+
+    if stream_proc.present?
+      parameters[:stream] = proc do |chunk, _bytesize|
         response[:id] = chunk["id"] if response[:id].nil? && chunk["id"].present?
+        delta = chunk.dig("choices", 0, "delta", "content")
+        next if delta.nil?
+        incremental_response += delta
         if stream_response_type == :text
-          delta = chunk.dig("choices", 0, "delta", "content")
-          next if delta.nil?
           response[:usage][:output_tokens] += 1
-          incremental_response += delta
           stream_proc.call(incremental_response, delta)
         elsif stream_response_type == :json
-          json_stack.concat(chunk.dig("choices", 0, "delta", "content"))
+          json_stack.concat(delta)
           begin
             if json_stack.strip.include?("}")
               matches = json_stack.match(/\{(?:[^{}]|\g<0>)*\}/)
@@ -62,21 +65,27 @@ class OpenAiApi < LlmApi
           end
         end
       end
-    }
+    end
 
     parameters[:messages] << { role: "system", content: params[:system] } if params[:system]
     parameters[:messages] << { role: "user", content: params[:user] } if params[:user]
 
     parameters[:messages] = params[:messages] if params[:messages]
 
-    @client.chat(parameters: parameters)
+    if stream_proc.present?
+      @client.chat(parameters: parameters)
+      response["choices"] = [ { "index": 0, "message": {
+          "role": "assistant",
+          "content": incremental_response
+        },
+        "finish_reason": "stop"} ]
+      response = JSON.parse(response.to_json) # Get all keys to be strings
+    else
+      response = @client.chat(parameters: parameters)
+    end
 
-    # Fake it for now
-    response[:choices] = [ { index: 0, message: {
-                                            role: "assistant",
-                                            content: incremental_response
-                                          },
-                              finish_reason: "stop"} ]
+    # Adjust to match Claude response format
+    response[:content] = [{ type: "text", text: response["choices"][0]["message"]["content"] }]
 
     JSON.parse(response.to_json)
   end
