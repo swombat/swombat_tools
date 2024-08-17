@@ -79,6 +79,14 @@ class DryApiTest < ActiveSupport::TestCase
     yaml_data["model"]
   end
 
+  def model_suffix
+    yaml_data["model_suffix"]
+  end
+
+  def vcr_cassette_name(test_name)
+    "#{api_class}#{model_suffix ? " #{model_suffix } " : " "}#{test_name}"
+  end
+
   test "yaml_file is set" do
     skip if self.class == DryApiTest
     assert_not_nil self.class.yaml_file
@@ -99,7 +107,7 @@ class DryApiTest < ActiveSupport::TestCase
     request = yaml_data["simple"]["request"]
     expected_response = yaml_data["simple"]["expected_response"]
 
-    vcr("#{api_class} simple request") do
+    vcr(vcr_cassette_name("simple request")) do
       response = api.get_response(
         params: {
           model: model,
@@ -118,7 +126,7 @@ class DryApiTest < ActiveSupport::TestCase
     request = yaml_data["streaming"]["request"]
     expected_response = yaml_data["streaming"]["expected_response"]
 
-    vcr("#{api_class} streaming request") do
+    vcr(vcr_cassette_name("streaming request")) do
       streamed_response = ""
       response = api.get_response(
         params: {
@@ -141,7 +149,7 @@ class DryApiTest < ActiveSupport::TestCase
     expected_response = yaml_data["JSON_streaming"]["expected_response"]
     expected_objects = JSON.parse(expected_response)
 
-    vcr("#{api_class} JSON streaming request") do
+    vcr(vcr_cassette_name("JSON streaming request")) do
       response_array = []
       response = api.get_response(
         params: {
@@ -167,7 +175,7 @@ class DryApiTest < ActiveSupport::TestCase
     expected_response_clean = yaml_data["JSON_noisy_streaming"]["expected_response_clean"]
     expected_objects = JSON.parse(expected_response_clean)
 
-    vcr("#{api_class} JSON noisy streaming request") do
+    vcr(vcr_cassette_name("JSON noisy streaming request")) do
       response_array = []
       response = api.get_response(
         params: {
