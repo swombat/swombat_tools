@@ -11,7 +11,7 @@ module SwombatTools
       ::ApplicationHelper.include(SwombatTools::ApplicationHelper)
       ::Array.include(SwombatTools::ArrayPatch)
       if (File.read("Gemfile").include?("anthropic"))
-        API_CLASSES = [::ClaudeApi, ::OpenAiApi]
+        API_CLASSES = [::ClaudeApi, ::OpenAiApi, ::OpenRouterApi]
       end
     end
 
