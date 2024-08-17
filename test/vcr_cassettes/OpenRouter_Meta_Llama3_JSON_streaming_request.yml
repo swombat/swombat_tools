@@ -1,0 +1,147 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://openrouter.ai/api/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"meta-llama/llama-3.1-8b-instruct","messages":[{"role":"user","content":"Hi
+        there! Please give me three fun and interesting facts about cats. Respond
+        ONLY with a JSON array, without any additional text or explanation. Each object
+        in the array should have ''fact'' and ''category'' keys."}],"temperature":0.7,"stream":true}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <OPENROUTER_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 17 Aug 2024 07:28:43 GMT
+      Content-Type:
+      - text/event-stream
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Authorization, User-Agent, X-Api-Key, X-CSRF-Token, X-Requested-With, Accept,
+        Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version,
+        HTTP-Referer, X-Windowai-Title, X-Openrouter-Title, X-Title, X-Stainless-Lang,
+        X-Stainless-Package-Version, X-Stainless-OS, X-Stainless-Arch, X-Stainless-Runtime,
+        X-Stainless-Runtime-Version
+      Access-Control-Allow-Methods:
+      - GET,OPTIONS,PATCH,DELETE,POST,PUT
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache
+      Content-Security-Policy:
+      - 'default-src ''self''; script-src ''self'' ''unsafe-eval'' ''unsafe-inline''
+        https://clerk.openrouter.ai https://cunning-heron-18.clerk.accounts.dev https://challenges.cloudflare.com
+        https://checkout.stripe.com https://connect-js.stripe.com https://js.stripe.com
+        https://maps.googleapis.com https://www.googletagmanager.com https://*.ingest.sentry.io;
+        connect-src ''self'' https://clerk.openrouter.ai https://cunning-heron-18.clerk.accounts.dev
+        https://checkout.stripe.com https://api.stripe.com https://maps.googleapis.com
+        *.google-analytics.com https://www.googletagmanager.com https://raw.githubusercontent.com
+        https://*.ingest.sentry.io; frame-src ''self'' https://challenges.cloudflare.com
+        https://checkout.stripe.com https://connect-js.stripe.com https://js.stripe.com
+        https://hooks.stripe.com https://us5.datadoghq.com https://*.ingest.sentry.io;
+        img-src ''self'' data: blob: https://img.clerk.com https://*.stripe.com https://www.googletagmanager.com
+        https://t0.gstatic.com; worker-src ''self'' blob:; style-src ''self'' ''unsafe-inline''
+        sha256-0hAheEzaMe6uXIKV4EehS9pu1am1lj/KnnzrOYqckXk=; upgrade-insecure-requests'
+      Strict-Transport-Security:
+      - max-age=63072000
+      X-Matched-Path:
+      - "/api/v1/chat/completions"
+      X-Vercel-Id:
+      - lhr1::qgqfv-1723879723650-f0a38dbfa1ff
+      Cf-Cache-Status:
+      - DYNAMIC
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8b47f2f0bbf776e1-LHR
+    body:
+      encoding: UTF-8
+      string: |+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"[\n"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"  {\n"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"    \"fact"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"\": \"C"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"ats have a"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" unique nose print"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":", just like"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" human fingerprints.\",\n"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"    \"category"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"\": \"Behavior"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"\"\n  },\n"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"  {\n   "},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" \"fact\":"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" \"Cats"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" can't taste"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" sweetness.\",\n   "},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" \"category\":"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" \"Physiology"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"\"\n  },\n"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"  {\n   "},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" \"fact\":"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" \"Cats"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" spend up to"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" 1/"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"3 of their"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" waking hours grooming"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" themselves.\",\n   "},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" \"category\":"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":" \"Behavior\"\n"},"finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":"  }\n]"},"finish_reason":null,"logprobs":null}]}
+
+        : OPENROUTER PROCESSING
+
+        data: {"id":"gen-HMNAkcs6DKoJW3DsgKL4beR96ouh","model":"meta-llama/llama-3.1-8b-instruct","object":"chat.completion.chunk","created":1723879723,"choices":[{"index":0,"delta":{"role":"assistant","content":""},"finish_reason":null,"logprobs":null}],"usage":{"prompt_tokens":54,"completion_tokens":88,"total_tokens":142}}
+
+        data: [DONE]
+
+  recorded_at: Sat, 17 Aug 2024 07:28:44 GMT
+recorded_with: VCR 6.2.0
+...

@@ -101,6 +101,7 @@ GEM
       rexml
     crass (1.0.6)
     date (3.3.4)
+    dotenv (3.1.2)
     drb (2.2.1)
     erubi (1.12.0)
     ethon (0.16.0)
@@ -155,6 +156,11 @@ GEM
     ollama-ai (1.2.1)
       faraday (~> 2.9)
       faraday-typhoeus (~> 1.1)
+    open_router (0.3.3)
+      activesupport (>= 6.0)
+      dotenv (>= 2)
+      faraday (>= 1)
+      faraday-multipart (>= 1)
     pg (1.5.6)
     psych (5.1.2)
       stringio
@@ -243,6 +249,7 @@ PLATFORMS
 DEPENDENCIES
   anthropic!
   ollama-ai
+  open_router
   pg
   puma
   ruby-openai

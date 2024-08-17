@@ -18,6 +18,7 @@ gem "anthropic", path: "../anthropic"
 gem "ruby-openai"
 gem "ollama-ai"
 gem "webmock"
+gem "open_router"
 
 group :test do
   gem "vcr"
