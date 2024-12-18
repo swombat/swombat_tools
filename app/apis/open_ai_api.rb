@@ -15,7 +15,7 @@ class OpenAiApi < LlmApi
       @models = ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"]
     else
       @models ||= @client.models.list["data"]
-        .select { |model| model["id"].starts_with?("gpt") }
+        .select { |model| model["id"].starts_with?("gpt") || model["id"].include?("o1") }
         .sort_by { |model| model["created"] }.reverse
         .collect { |model| model["id"] }
     end
