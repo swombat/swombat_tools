@@ -30,6 +30,10 @@ class OpenAiApi < LlmApi
     params[:model].include?("o1") && !params[:model].include?("o1-mini")
   end
 
+  def is_o1_mini_model?(params)
+    params[:model].include?("o1-mini")
+  end
+
   def is_o3_model?(params)
     params[:model].include?("o3")
   end
@@ -83,6 +87,8 @@ class OpenAiApi < LlmApi
 
     if is_o3_model?(params)
       parameters[:messages] << { role: "developer", content: params[:system] } if params[:system]
+    elsif is_o1_mini_model?(params)
+      parameters[:messages] << { role: "user", content: params[:system] } if params[:system]
     else
       parameters[:messages] << { role: "system", content: params[:system] } if params[:system]
     end
@@ -90,7 +96,7 @@ class OpenAiApi < LlmApi
 
     parameters[:messages] = params[:messages] if params[:messages]
 
-    if stream_proc.present? && !params[:model].include?("o1")
+    if stream_proc.present? && !is_o1_model?(params)
       @client.chat(parameters: parameters)
       response["choices"] = [ { "index": 0, "message": {
           "role": "assistant",
@@ -98,7 +104,7 @@ class OpenAiApi < LlmApi
         },
         "finish_reason": "stop"} ]
       response = JSON.parse(response.to_json) # Get all keys to be strings
-    elsif stream_proc.present? && params[:model].include?("o1")
+    elsif stream_proc.present? && is_o1_model?(params)
       response = @client.chat(parameters: parameters)
       stream_proc.call(response["choices"][0]["message"]["content"], response["choices"][0]["message"]["content"])
       response
