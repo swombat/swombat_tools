@@ -13,7 +13,7 @@ class OpenAiApi < LlmApi
 
   def models
     if @access_token == "x"
-      @models = ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"]
+      @models = ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo", "o3-mini", "o1"]
     else
       @models ||= @client.models.list["data"]
         .select { |model| model["id"].starts_with?("gpt") || model["id"].include?("o1") || model["id"].include?("o3") }
