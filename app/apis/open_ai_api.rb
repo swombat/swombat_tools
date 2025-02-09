@@ -30,6 +30,10 @@ class OpenAiApi < LlmApi
     params[:model].include?("o1") && !params[:model].include?("o1-mini")
   end
 
+  def is_o3_model?(params)
+    params[:model].include?("o3")
+  end
+
   def get_response(params:, stream_proc: nil, stream_response_type: :text)
     params = params.transform_keys(&:to_sym)
     incremental_response = ""
@@ -77,7 +81,7 @@ class OpenAiApi < LlmApi
       end
     end
 
-    if is_o_model?(params)
+    if is_o3_model?(params)
       parameters[:messages] << { role: "developer", content: params[:system] } if params[:system]
     else
       parameters[:messages] << { role: "system", content: params[:system] } if params[:system]
