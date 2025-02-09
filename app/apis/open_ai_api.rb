@@ -16,10 +16,18 @@ class OpenAiApi < LlmApi
       @models = ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo", "o3-mini", "o1"]
     else
       @models ||= @client.models.list["data"]
-        .select { |model| model["id"].starts_with?("gpt") || model["id"].include?("o1") || model["id"].include?("o3") }
+        .select { |model| model["id"].starts_with?("gpt") || model["id"].include?("o1") || model["id"].include?("o3") || model["id"].include?("o4") }
         .sort_by { |model| model["created"] }.reverse
         .collect { |model| model["id"] }
     end
+  end
+
+  def is_o_model?(params)
+    params[:model].include?("o1") || params[:model].include?("o3") || params[:model].include?("o4")
+  end
+
+  def is_o1_model?(params)
+    params[:model].include?("o1") && !params[:model].include?("o1-mini")
   end
 
   def get_response(params:, stream_proc: nil, stream_response_type: :text)
@@ -41,9 +49,9 @@ class OpenAiApi < LlmApi
       messages: []
     }
 
-    parameters[:temperature] ||= 0.7 unless params[:model].include?("o1")
+    parameters[:temperature] ||= 0.7 unless is_o_model?(params)
 
-    if stream_proc.present? && !params[:model].include?("o1")
+    if stream_proc.present? && !is_o1_model?(params)
       parameters[:stream] = proc do |chunk, _bytesize|
         response[:id] = chunk["id"] if response[:id].nil? && chunk["id"].present?
         delta = chunk.dig("choices", 0, "delta", "content")
@@ -69,7 +77,11 @@ class OpenAiApi < LlmApi
       end
     end
 
-    parameters[:messages] << { role: "system", content: params[:system] } if params[:system]
+    if is_o_model?(params)
+      parameters[:messages] << { role: "developer", content: params[:system] } if params[:system]
+    else
+      parameters[:messages] << { role: "system", content: params[:system] } if params[:system]
+    end
     parameters[:messages] << { role: "user", content: params[:user] } if params[:user]
 
     parameters[:messages] = params[:messages] if params[:messages]
