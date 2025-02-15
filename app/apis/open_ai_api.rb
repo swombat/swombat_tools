@@ -59,7 +59,7 @@ class OpenAiApi < LlmApi
 
     parameters[:temperature] ||= 0.7 unless is_o_model?(params)
 
-    if stream_proc.present? && !is_o1_model?(params)
+    if stream_proc.present? # && !is_o1_model?(params)
       parameters[:stream] = proc do |chunk, _bytesize|
         response[:id] = chunk["id"] if response[:id].nil? && chunk["id"].present?
         delta = chunk.dig("choices", 0, "delta", "content")
@@ -96,7 +96,7 @@ class OpenAiApi < LlmApi
 
     parameters[:messages] = params[:messages] if params[:messages]
 
-    if stream_proc.present? && !is_o1_model?(params)
+    if stream_proc.present? # && !is_o1_model?(params)
       @client.chat(parameters: parameters)
       response["choices"] = [ { "index": 0, "message": {
           "role": "assistant",
@@ -104,10 +104,10 @@ class OpenAiApi < LlmApi
         },
         "finish_reason": "stop"} ]
       response = JSON.parse(response.to_json) # Get all keys to be strings
-    elsif stream_proc.present? && is_o1_model?(params)
-      response = @client.chat(parameters: parameters)
-      stream_proc.call(response["choices"][0]["message"]["content"], response["choices"][0]["message"]["content"])
-      response
+    # elsif stream_proc.present? && is_o1_model?(params)
+    #   response = @client.chat(parameters: parameters)
+    #   stream_proc.call(response["choices"][0]["message"]["content"], response["choices"][0]["message"]["content"])
+    #   response
     else
       response = @client.chat(parameters: parameters)
     end
