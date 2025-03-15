@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'openai'
 
 class OpenAiApi < LlmApi
@@ -69,7 +71,7 @@ class OpenAiApi < LlmApi
           response[:usage][:output_tokens] += 1
           stream_proc.call(incremental_response, delta)
         elsif stream_response_type == :json
-          json_stack.concat(delta)
+          json_stack += delta
           begin
             if json_stack.strip.include?("}")
               matches = json_stack.match(/\{(?:[^{}]|\g<0>)*\}/)

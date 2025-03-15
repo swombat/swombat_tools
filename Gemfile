@@ -14,7 +14,7 @@ gem "sprockets-rails"
 # gem "debug", ">= 1.0.0"
 
 # , path: "../swombat_tools"
-gem "anthropic", path: "../anthropic"
+gem "anthropic" #, path: "../anthropic"
 gem "ruby-openai"
 gem "ollama-ai"
 gem "webmock"
