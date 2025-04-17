@@ -121,11 +121,12 @@ class OpenAiApi < LlmApi
   end
 
   def log(error)
-    logger = Logger.new($stdout)
-    logger.formatter = proc do |_severity, _datetime, _progname, msg|
-      "\033[31mOpenAI JSON Error (spotted in swombat_tools): #{msg}\n\033[0m"
-    end
-    logger.error(error)
+    Rails.logger.error "OpenAI JSON Error (spotted in swombat_tools): #{error.message}"
+    # logger = Logger.new($stdout)
+    # logger.formatter = proc do |_severity, _datetime, _progname, msg|
+    #   "\033[31mOpenAI JSON Error (spotted in swombat_tools): #{msg}\n\033[0m"
+    # end
+    # logger.error(error)
   end
 
 end
